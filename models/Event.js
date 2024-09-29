@@ -13,6 +13,10 @@ const EventSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  time: {
+    type: String,
+    required: true,
+  },
   attendees: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -31,6 +35,11 @@ const EventSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  organizer: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  }
 });
 
 const Event = mongoose.models.Event || mongoose.model("Event", EventSchema);

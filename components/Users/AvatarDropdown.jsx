@@ -13,6 +13,7 @@ import {
 } from "../ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import Link from "next/link";
+import axios from "axios";
 
 export default function AvtarDropdown() {
   const { toast } = useToast();
@@ -40,8 +41,8 @@ export default function AvtarDropdown() {
         <Link href={"/myevents"}>
           <DropdownMenuItem>My Events</DropdownMenuItem>
         </Link>
-        <Link href={'/accouncements'}>
-        <DropdownMenuItem>Announcements</DropdownMenuItem>
+        <Link href={"/accouncements"}>
+          <DropdownMenuItem>Announcements</DropdownMenuItem>
         </Link>
         {user.role === "admin" ? (
           <>
@@ -60,12 +61,11 @@ export default function AvtarDropdown() {
             try {
               const response = await axios.get("/api/logout");
               if (response.status === 200) {
+                router.push("/");
                 setUser(null);
-                setTimeout(() => {
-                  toast({
-                    description: response.data.message,
-                  });
-                  router.push("/");
+
+                toast({
+                  description: response.data.message,
                 });
               }
             } catch (error) {
