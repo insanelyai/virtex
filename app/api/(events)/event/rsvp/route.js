@@ -2,6 +2,7 @@ import { connect } from "@/lib/connect";
 import Event from "@/models/Event";
 import User from "@/models/User";
 import { NextResponse } from "next/server";
+import jwt from "jsonwebtoken"
 
 connect()
 export async function POST(request) {
@@ -44,10 +45,26 @@ export async function POST(request) {
 
     // Send a notification to the event organizer about the new RSVP (if needed)
 
-    return NextResponse.json(
+    const response =  NextResponse.json(
       { message: "User successfully added to the event" },
       { status: 200 }
     );
+
+    const payload = {
+      id: user.id,
+      username: user.username,
+      email: user.email,
+      rsvpEvents: user.rsvpEvents,
+      role: user.role,
+    }
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET);
+
+    
+    response.cookies.set("user", token);
+
+    return response;
+
   } catch (error) {
     console.log(error);
     return NextResponse.json(

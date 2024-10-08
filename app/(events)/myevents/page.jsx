@@ -10,30 +10,11 @@ export default function page() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchUser() {
-      await axios
-        .get("/api/fetch-user")
-        .then((response) => {
-          if (response.status === 200) {
-            if (response.data.payload) {
-              setUser(response.data.payload);
-            }
-          }
-        })
-        .catch((error) => {
-          console.error("Error fetching user:", error);
-        });
-    }
-
-    fetchUser();
-  }, []);
-
-  useEffect(() => {
     if (user) {
       async function fetchAllEvents() {
         const userId = user.id;
         setLoading(true);
-        console.log(user.rsvpEvents)
+       
         await axios
           .post("/api/event/rsvpdevents", { id: userId })
           .then((response) => {

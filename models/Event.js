@@ -23,6 +23,13 @@ const EventSchema = new mongoose.Schema({
       ref: "User",
     },
   ],
+  announcement: [
+    {
+      title: { type: String, required: true },
+      description: { type: String },
+      createdAt: { type: Date, default: new Date() },
+    },
+  ],
   image: {
     type: String,
     required: true,
@@ -39,7 +46,7 @@ const EventSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
-  }
+  },
 });
 
 const Event = mongoose.models.Event || mongoose.model("Event", EventSchema);

@@ -29,11 +29,11 @@ export default function EventCard({ event }) {
         .then((response) => {
           if (response.status === 200) {
             toast({ description: response.data.message });
-            setIsRegistered(true); // Mark as registered after successful RSVP
+            setIsRegistered(true); 
             setUser({
               ...user,
-              rsvpEvents: [...user.rsvpEvents, event._id], // Spread the current array and add the new event ID
-            }); // Update user's RSVP array
+              rsvpEvents: [...user.rsvpEvents, event._id], 
+            }); 
             router.push("/myevents");
           } else {
             toast({ description: response.data.message });
@@ -45,16 +45,12 @@ export default function EventCard({ event }) {
     }
   }
 
-  // Check if the user is already registered for this event
   useEffect(() => {
     if (user && event) {
-      console.log(user.rsvpEvents);
-      // Ensure both are strings to compare correctly
       const eventRSVP = user.rsvpEvents?.some(
         (rsvpEventId) => String(rsvpEventId) === String(event._id)
       );
 
-      console.log("Event RSVP:", eventRSVP); // Check if this is true
       setIsRegistered(eventRSVP); // Set the state accordingly
     }
   }, [user, event]);

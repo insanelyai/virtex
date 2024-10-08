@@ -19,7 +19,7 @@ const actionCards = [
       <MegaphoneIcon className="w-16 h-16 bg-accent/40 p-2 rounded" size={24} />
     ),
     gradient: "bg-gradient-to-r from-yellow-200 to-orange-400",
-    path: "/announcements",
+    path: "/events",
   },
   {
     title: "All Events",

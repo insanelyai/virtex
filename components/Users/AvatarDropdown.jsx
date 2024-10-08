@@ -34,14 +34,14 @@ export default function AvtarDropdown() {
           <AvatarFallback>{Fallback}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="relative rounded m-0 p-2" align="center">
+      <DropdownMenuContent className="relative rounded m-0 p-2" align="end" >
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>Profile</DropdownMenuItem>
         <Link href={"/myevents"}>
           <DropdownMenuItem>My Events</DropdownMenuItem>
         </Link>
-        <Link href={"/accouncements"}>
+        <Link href={"/announcements"}>
           <DropdownMenuItem>Announcements</DropdownMenuItem>
         </Link>
         {user.role === "admin" ? (
